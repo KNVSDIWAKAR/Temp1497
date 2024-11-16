@@ -1,0 +1,38 @@
+.income-expense-graph {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  font-family: "Arial", sans-serif;
+  border: 1px solid #f4f5f7;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h3 {
+  font-size: 18px;
+  color: #333;
+  margin: 0;
+}
+
+.dropdowns {
+  display: flex;
+  gap: 10px;
+}
+
+.dropdown {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: white;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+}

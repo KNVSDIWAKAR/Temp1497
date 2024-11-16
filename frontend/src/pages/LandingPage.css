@@ -1,0 +1,46 @@
+/* Navbar Styles */
+.navbar {
+    background-color: #333;
+    padding: 10px;
+}
+
+.navbar-list {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-item a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar-item a:hover {
+    text-decoration: underline;
+}
+
+/* Landing Page Styles */
+.landing-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+}
+
+.landing-page h1 {
+    color: #023047;
+    font-size: 36px;
+}
+
+/* Page Placeholder Styles */
+.page {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+    color: #555;
+}

@@ -1,0 +1,75 @@
+.overview {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.card {
+  max-width: 200px;
+  flex: 1;
+  margin-right: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.card:last-child {
+  margin-right: 0;
+}
+
+.icon-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-container img {
+  width: 20px;
+  height: 20px;
+}
+
+.balance-icon {
+  background-color: #d9f3f0;
+}
+
+.income-icon {
+  background-color: #ece5fa;
+}
+
+.savings-icon {
+  background-color: #e8f6ea;
+}
+
+.expenses-icon {
+  background-color: #f7e9e8;
+}
+
+.details h4 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.details p {
+  font-size: 16px;
+  color: #999;
+  margin: 5px 0 0;
+}
+
+.percentage {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 14px;
+  color: #28a745;
+}
+
+.percentage.negative {
+  color: #dc3545;
+}

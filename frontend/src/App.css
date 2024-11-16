@@ -1,0 +1,26 @@
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .overview,
+  .my-cards,
+  .income-expense,
+  .last-transactions {
+    flex-direction: column;
+  }
+
+  .card,
+  .card-item {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .main-content {
+    padding: 10px;
+  }
+}
