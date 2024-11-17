@@ -42,6 +42,7 @@ const Login = ({ handleAuthentication }) => {
         >
           <div>
             <label
+              style={{ color: "#d3d3d3" }}
               htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
@@ -62,6 +63,7 @@ const Login = ({ handleAuthentication }) => {
           <div>
             <div className="flex items-center justify-between">
               <label
+                style={{ color: "#d3d3d3" }}
                 htmlFor="password"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >

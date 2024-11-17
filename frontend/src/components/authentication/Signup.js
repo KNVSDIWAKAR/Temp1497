@@ -1,5 +1,4 @@
 import React from "react";
-// import signupImage from "../asserts/LoginBackground.jpg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +12,7 @@ const Signup = ({ handleAuthentication }) => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [age, setAge] = useState("");
+  const [gender, setGender] = useState(""); // State for gender
   const navigate = useNavigate();
 
   const handleFormSubmit = async (event) => {
@@ -25,6 +25,7 @@ const Signup = ({ handleAuthentication }) => {
       password,
       phone,
       age,
+      gender, // Include gender in the data object
     };
 
     const res = await axios.post("http://localhost:814/user/signup", data);
@@ -38,16 +39,7 @@ const Signup = ({ handleAuthentication }) => {
   };
 
   return (
-    <div
-      className="flex min-h-full w-full flex-1 flex-col justify-center px-6 py-12 lg:px-8"
-      //   style={{
-      //     backgroundImage: `url(${signupImage})`,
-      //     backgroundSize: "cover",
-      //     backgroundPosition: "center",
-      //     backgroundRepeat: "no-repeat",
-      //     height: "100vh",
-      //   }}
-    >
+    <div className="flex min-h-full w-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="mt-20 sm:mx-auto sm:w-full sm:max-w-sm">
         <form
           action="#"
@@ -57,6 +49,7 @@ const Signup = ({ handleAuthentication }) => {
         >
           <div>
             <label
+              style={{ color: "#d3d3d3" }}
               htmlFor="name"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
@@ -76,6 +69,7 @@ const Signup = ({ handleAuthentication }) => {
 
           <div>
             <label
+              style={{ color: "#d3d3d3" }}
               htmlFor="name"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
@@ -95,6 +89,7 @@ const Signup = ({ handleAuthentication }) => {
 
           <div>
             <label
+              style={{ color: "#d3d3d3" }}
               htmlFor="age"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
@@ -114,7 +109,30 @@ const Signup = ({ handleAuthentication }) => {
 
           <div>
             <label
-              htmlFor="name"
+              style={{ color: "#d3d3d3" }}
+              htmlFor="gender"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Gender
+            </label>
+            <div className="mt-2">
+              <select
+                value={gender}
+                onChange={(event) => setGender(event.target.value)}
+                id="gender"
+                name="gender"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label
+              style={{ color: "#d3d3d3" }}
+              htmlFor="username"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
               Username
@@ -133,6 +151,7 @@ const Signup = ({ handleAuthentication }) => {
 
           <div>
             <label
+              style={{ color: "#d3d3d3" }}
               htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
@@ -152,6 +171,7 @@ const Signup = ({ handleAuthentication }) => {
 
           <div>
             <label
+              style={{ color: "#d3d3d3" }}
               htmlFor="password"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
@@ -171,7 +191,8 @@ const Signup = ({ handleAuthentication }) => {
 
           <div>
             <label
-              htmlFor="mobile"
+              style={{ color: "#d3d3d3" }}
+              htmlFor="phone"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
               Mobile Number
