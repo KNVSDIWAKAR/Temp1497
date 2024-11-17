@@ -1,5 +1,6 @@
 import React from "react";
-
+import SideBar from "./SideBar";
+import "../dashboard/Styles/Transactions.css";
 const Transactions = () => {
   const transactions = [
     { sNo: 1, name: "John Doe", type: "Credit", amount: "$500" },
@@ -20,49 +21,51 @@ const Transactions = () => {
   ];
 
   return (
-    <div style={{ padding: "40px", margin: "40px", marginLeft: "250px" }}>
-      <table
-        style={{
-          width: "100%",
-          borderCollapse: "collapse",
-          borderRadius: "10px",
-          overflow: "hidden",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <thead>
-          <tr
-            style={{
-              backgroundColor: "hsl(240, 2%, 12%)",
-              color: "white",
-              textAlign: "left",
-            }}
-          >
-            <th style={{ padding: "10px" }}>S.No</th>
-            <th style={{ padding: "10px" }}>Name</th>
-            <th style={{ padding: "10px" }}>Type</th>
-            <th style={{ padding: "10px" }}>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          {transactions.map((transaction) => (
-            <tr key={transaction.sNo} style={{ textAlign: "left" }}>
-              <td style={{ padding: "10px", color: "black" }}>
-                {transaction.sNo}
-              </td>
-              <td style={{ padding: "10px", color: "black" }}>
-                {transaction.name}
-              </td>
-              <td style={{ padding: "10px", color: "black" }}>
-                {transaction.type}
-              </td>
-              <td style={{ padding: "10px", color: "black" }}>
-                {transaction.amount}
-              </td>
+    <div className="transactionscontainer">
+      <SideBar />
+      <div className="transactions-container">
+        <table
+          style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            borderRadius: "10px",
+            overflow: "hidden",
+          }}
+        >
+          <thead>
+            <tr
+              style={{
+                backgroundColor: "#3C3C3D ",
+                color: "#98844C",
+                textAlign: "left",
+              }}
+            >
+              <th style={{ padding: "10px" }}>S.No</th>
+              <th style={{ padding: "10px" }}>Name</th>
+              <th style={{ padding: "10px" }}>Type</th>
+              <th style={{ padding: "10px" }}>Amount</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {transactions.map((transaction) => (
+              <tr key={transaction.sNo} style={{ textAlign: "left" }}>
+                <td style={{ padding: "10px", color: "white" }}>
+                  {transaction.sNo}
+                </td>
+                <td style={{ padding: "10px", color: "white" }}>
+                  {transaction.name}
+                </td>
+                <td style={{ padding: "10px", color: "white" }}>
+                  {transaction.type}
+                </td>
+                <td style={{ padding: "10px", color: "white" }}>
+                  {transaction.amount}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

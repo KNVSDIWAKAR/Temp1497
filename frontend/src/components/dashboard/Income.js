@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "../dashboard/Styles/Transfer.css";
 import SideBar from "./SideBar";
-
-const Transfer = () => {
+const Income = () => {
   const [accountName, setAccountName] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState("");
@@ -103,10 +102,8 @@ const Transfer = () => {
           <div className="form-group">
             <label>Transfer Option</label>
             <select>
-              <option value="sending">Sent Money</option>
-              <option value="subscription">Subscription</option>
-              <option value="merchant">Merchant</option>
-              <option value="ecommerce">E-commerce Payment</option>
+              <option value="receiving">Received</option>
+              <option value="salary">Salary</option>ss
             </select>
           </div>
           <button type="submit" className="btn-transfer">
@@ -150,4 +147,4 @@ const Transfer = () => {
   );
 };
 
-export default Transfer;
+export default Income;

@@ -1,5 +1,7 @@
 import React from "react";
 import Cards from "./Cards";
+import SideBar from "./SideBar";
+import "../dashboard/Styles/Cards.css";
 
 const DisplayCards = () => {
   const cardDataList = [
@@ -75,30 +77,6 @@ const DisplayCards = () => {
       expiryDate: "11/24",
       paymentNetwork: "RuPay",
     },
-    {
-      bankName: "Yes Bank",
-      cardHolder: "Lucas King",
-      cardType: "Debit Card",
-      cardNumber: "9812981298129812",
-      expiryDate: "02/27",
-      paymentNetwork: "Visa",
-    },
-    {
-      bankName: "IndusInd Bank",
-      cardHolder: "Olivia Johnson",
-      cardType: "Credit Card",
-      cardNumber: "6543654365436543",
-      expiryDate: "09/28",
-      paymentNetwork: "MasterCard",
-    },
-    {
-      bankName: "IndusInd Bank",
-      cardHolder: "Olivia Johnson",
-      cardType: "Credit Card",
-      cardNumber: "6543654365436543",
-      expiryDate: "09/28",
-      paymentNetwork: "MasterCard",
-    },
   ];
 
   const shuffleArray = (array) => {
@@ -109,12 +87,12 @@ const DisplayCards = () => {
     return array;
   };
 
-  // Shuffle the cardDataList to randomize the order
   const shuffledCardDataList = shuffleArray(cardDataList);
   console.log(shuffledCardDataList);
 
   return (
-    <div style={{ marginTop: "100px" }}>
+    <div className="cardscontainer">
+      <SideBar />
       <Cards cardDataList={cardDataList} />
     </div>
   );

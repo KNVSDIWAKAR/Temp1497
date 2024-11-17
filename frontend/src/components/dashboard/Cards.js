@@ -2,6 +2,7 @@ import React from "react";
 import visaLogo from "../Asserts/visa.png";
 import mastercardLogo from "../Asserts/mastercard.png";
 import rupayLogo from "../Asserts/rupay.png";
+import "../dashboard/Styles/Cards.css";
 
 // Function to get the appropriate payment network logo
 const getPaymentNetworkLogo = (network) => {
@@ -27,6 +28,7 @@ const Cards = ({ cardDataList }) => {
         justifyContent: "center",
         padding: "20px",
       }}
+      className="cards-container"
     >
       {cardDataList.map((card, index) => (
         <div

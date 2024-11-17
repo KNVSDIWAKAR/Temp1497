@@ -1,8 +1,7 @@
 .income-expense-graph {
-  background-color: white;
+  background-color: #282829;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   font-family: "Arial", sans-serif;
   border: 1px solid #f4f5f7;
   border-radius: 10px;
@@ -31,8 +30,8 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 5px;
-  background-color: white;
+  background-color: #282829;
   font-size: 14px;
-  color: #333;
+  color: #d3d3d3;
   outline: none;
 }

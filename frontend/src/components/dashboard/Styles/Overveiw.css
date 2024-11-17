@@ -9,9 +9,8 @@
   flex: 1;
   margin-right: 20px;
   padding: 20px;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  background-color: #282829;
+  border-radius: 5px;
   position: relative;
 }
 
@@ -33,32 +32,23 @@
   height: 20px;
 }
 
-.balance-icon {
-  background-color: #d9f3f0;
-}
-
-.income-icon {
-  background-color: #ece5fa;
-}
-
-.savings-icon {
-  background-color: #e8f6ea;
-}
-
+.balance-icon,
+.income-icon,
+.savings-icon,
 .expenses-icon {
-  background-color: #f7e9e8;
+  background-color: #3c3c3d;
 }
 
 .details h4 {
   font-size: 24px;
   font-weight: 600;
   margin: 0;
-  color: #333;
+  color: #d3d3d3;
 }
 
 .details p {
   font-size: 16px;
-  color: #999;
+  color: gray;
   margin: 5px 0 0;
 }
 

@@ -1,10 +1,9 @@
 import React from "react";
-import "./MyCards.css";
+import "../dashboard/Styles/MyCards.css";
 
 function MyCards() {
   return (
     <section className="my-cards">
-      {/* <h3>My Cards</h3> */}
       <div className="cards">
         <div className="card-item blue-card">
           <div className="chip"></div>
@@ -39,8 +38,6 @@ function MyCards() {
             </div>
           </div>
         </div>
-
-        <button className="add-card">+ Add New Card</button>
       </div>
     </section>
   );

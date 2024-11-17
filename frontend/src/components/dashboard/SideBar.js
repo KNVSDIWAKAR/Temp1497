@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { MdOutlineSavings } from "react-icons/md";
 import {
   FaHome,
   FaChartLine,
@@ -10,9 +11,10 @@ import {
   FaUser,
   FaReceipt,
   FaIdCard,
+  FaInc,
 } from "react-icons/fa";
 import ProfilePicture from "../Asserts/maleAvatar.png";
-import "./SideBar.css";
+import "../dashboard/Styles/SideBar.css";
 
 function SideBar({ handleAuthentication }) {
   const navigate = useNavigate();
@@ -43,8 +45,25 @@ function SideBar({ handleAuthentication }) {
 
       <ul className="menu">
         <li>
-          <Link to="/">
+          <Link to="/dashboard">
             <FaHome className="icon" /> Dashboard
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/transfer">
+            <FaExchangeAlt className="icon" /> Transfer
+          </Link>
+        </li>
+        <li>
+          <Link to="/income">
+            <MdOutlineSavings className="icon" />
+            Income
+          </Link>
+        </li>
+        <li>
+          <Link to="/addcard">
+            <FaCreditCard className="icon" /> Add Cards
           </Link>
         </li>
         <li>
@@ -58,21 +77,11 @@ function SideBar({ handleAuthentication }) {
           </Link>
         </li>
         <li>
-          <Link to="/transfer">
-            <FaExchangeAlt className="icon" /> Transfer
-          </Link>
-        </li>
-        <li>
-          <Link to="/addcard">
-            <FaCreditCard className="icon" /> Add Cards
-          </Link>
-        </li>
-        <li>
           <Link to="/statistics">
             <FaChartLine className="icon" /> Statistics
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/messages">
             <FaEnvelope className="icon" /> Message
           </Link>
@@ -81,7 +90,7 @@ function SideBar({ handleAuthentication }) {
           <Link to="/wallet">
             <FaWallet className="icon" /> My Wallet
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/profile">
             <FaUser className="icon" /> Profile
@@ -89,8 +98,8 @@ function SideBar({ handleAuthentication }) {
         </li>
       </ul>
 
-      <button onClick={handleLogout} className="logout">
-        Logout
+      <button className="logout">
+        <Link to="/">Logout</Link>
       </button>
     </aside>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import "./LastTransaction.css";
+import "../dashboard/Styles/LastTransaction.css";
 
 const transactions = [
   {
@@ -84,6 +84,14 @@ const transactions = [
 const LastTransaction = () => {
   return (
     <div className="transaction-list-container">
+      <h1
+        style={{
+          textAlign: "center",
+          color: "grey",
+        }}
+      >
+        Transactions
+      </h1>
       <div className="transaction-list">
         {transactions.map((transaction) => (
           <div key={transaction.id} className="transaction-item">

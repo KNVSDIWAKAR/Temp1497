@@ -1,14 +1,15 @@
 .transaction-list-container {
-  width: 100%;
+  width: 30%;
   max-width: 1000px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #1e1e1f;
+  border-radius: 5px;
+  padding: 20px;
+  border: 1px solid #d3d3d3;
 }
 
 .transaction-list {
   font-family: "Arial", sans-serif;
-  color: #333;
+  color: #ffff;
 }
 
 .transaction-item {
@@ -16,7 +17,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 0;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 1px solid #d6d6d6;
 }
 
 .transaction-left {
@@ -31,7 +32,7 @@
 
 .transaction-type {
   font-size: 0.9em;
-  color: #888;
+  color: #d6d6d6;
 }
 
 .transaction-right {
@@ -53,7 +54,7 @@
 
 .transaction-date-time {
   font-size: 0.85em;
-  color: #888;
+  color: #d6d6d6;
   margin-top: 5px;
 }
 

@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import "./IncomeExpenses.css";
+import "../dashboard/Styles/IncomeExpenses.css";
 
 ChartJS.register(
   CategoryScale,
@@ -88,7 +88,7 @@ function IncomeExpenses() {
           30000, 35000, 32000, 34000, 36000, 38000, 40000, 42000, 44000, 46000,
           48000, 50000,
         ],
-        borderColor: "#94e7ce", // Green color for Expense
+        borderColor: "#94e7ce",
         backgroundColor: "rgba(148, 231, 206, 0.2)",
         fill: true,
         tension: 0.4,
@@ -136,19 +136,15 @@ function IncomeExpenses() {
     },
   };
 
-  // Inline style for the chart wrapper
   const chartWrapperStyle = {
-    border: "1px solid #f4f5f7", // 1px solid border
-    borderRadius: "10px", // Rounded corners
-    padding: "10px", // Optional: Adds padding inside the border
-    backgroundColor: "#ffffff", // Optional: Background color inside the border
-    boxSizing: "border-box", // Ensures padding and border are included in element's total width and height
+    borderRadius: "5px",
+    backgroundColor: "#282829",
+    boxSizing: "border-box",
   };
 
   return (
     <div className="income-expense-graph">
       <div className="header">
-        <h3>Income & Expense</h3>
         <div className="dropdowns">
           <select
             value={timeframe}

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Dashboard.css";
+import "../dashboard/Styles/Dashboard.css";
 import Overview from "./Overview";
 import MyCards from "./MyCards";
 import IncomeExpenses from "./IncomeExpenses";
@@ -9,22 +9,13 @@ import SideBar from "./SideBar";
 function Dashboard({ handleAuthentication }) {
   return (
     <div className="dashboard-container">
-      <SideBar handleAuthentication={handleAuthentication} />
+      <SideBar />
       <div className="main-content">
         <Overview />
-        <div>
-          <h3>My Cards</h3>
-          <MyCards />
-        </div>
-        <div>
-          <IncomeExpenses />
-        </div>
+        <MyCards />
+        <IncomeExpenses />
       </div>
-
-      <div className="box3">
-        <h3>LastTransaction</h3>
-        <LastTransaction />
-      </div>
+      <LastTransaction />
     </div>
   );
 }
