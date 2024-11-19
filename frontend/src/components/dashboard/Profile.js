@@ -5,17 +5,36 @@ import SideBar from "./SideBar";
 import "../dashboard/Styles/Profile.css";
 
 const Profile = () => {
+  const username = localStorage.getItem("username");
   const [userData, setUserData] = useState({
-    firstName: "John",
-    lastName: "Doe",
-    username: "john_doe",
-    email: "john.doe@example.com",
-    phone: "123-456-7890",
-    age: 25,
-    gender: "Male",
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    phone: "",
+    age: 0,
+    gender: "",
   });
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:814/user/userData/${username}`
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+
+        const data = await response.json();
+        setUserData(data); // Set the fetched data to the state
+      } catch (error) {
+        console.error("Error fetching user data:", error.message);
+      }
+    };
+    fetchUserData();
+  }, [username]);
 
   return (
     <div className="profilecontainer">
@@ -57,7 +76,11 @@ const Profile = () => {
 
           {/* Image */}
           <img
-            src={userData.gender === "Male" ? maleProfilePic : femaleProfilePic}
+            src={
+              userData.gender === "Male" || "male"
+                ? maleProfilePic
+                : femaleProfilePic
+            }
             alt="Profile"
             style={{
               borderRadius: "50%",

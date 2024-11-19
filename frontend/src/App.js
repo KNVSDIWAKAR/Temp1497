@@ -50,7 +50,17 @@ function App() {
             path="/signup"
             element={<Signup handleAuthentication={handleAuthentication} />}
           />
-          <Route path="/dashboard" element={<Dashboard />} />
+          {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+          <Route
+            path="/dashboard"
+            element={
+              isAuthenticated ? (
+                <Dashboard handleAuthentication={handleAuthentication} />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          />
         </Routes>
       </Router>
     </div>

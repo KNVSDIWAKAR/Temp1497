@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const incomeSchema = new mongoose.Schema({
+  username: { type: String, required: true },
   senderName: {
     type: String,
     required: true,
@@ -27,6 +28,7 @@ const incomeSchema = new mongoose.Schema({
     default: "Completed",
     enum: ["Completed", "Pending"],
   },
+  type: { type: String, default: "credit" },
 });
 
 module.exports = mongoose.model("Income", incomeSchema);

@@ -9,35 +9,15 @@ const Transfer = () => {
   const [transferDate, setTransferDate] = useState("");
   const [note, setNote] = useState("");
   const [mode, setMode] = useState("");
-  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!paymentMethod) {
-      setError("Please select a payment method.");
-      return;
-    }
-
-    if (!mode) {
-      setError("Please select a transfer option.");
-      return;
-    }
-
-    setError("");
-
-    // Log the form data to the console, including mode
-    console.log({
-      receiverName,
-      paymentMethod,
-      amount,
-      date: transferDate || new Date().toLocaleDateString(),
-      note,
-      mode,
-    });
+    const username = localStorage.getItem("username");
 
     const newTransaction = {
-      receiverName, // Change to receiverName
+      username,
+      receiverName,
       paymentMethod,
       amount,
       date: transferDate || new Date().toLocaleDateString(),
@@ -46,7 +26,7 @@ const Transfer = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:814/txn/createTxn", {
+      const response = await fetch(`http://localhost:814/txn/createTxn`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,19 +37,17 @@ const Transfer = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.error || "Failed to save transaction.");
+        alert("Insufficient Funds");
       } else {
         alert("Transaction saved successfully!");
-        setReceiverName(""); // Change to receiverName
+        setReceiverName("");
         setPaymentMethod("");
         setAmount("");
         setTransferDate("");
         setNote("");
         setMode("");
       }
-    } catch (err) {
-      setError("Something went wrong. Please try again later.");
-    }
+    } catch (err) {}
   };
 
   return (
@@ -154,10 +132,14 @@ const Transfer = () => {
               required
             >
               <option value="">Select Transfer Option</option>
-              <option value="sending">Sent Money</option>
+              <option value="household">House-Hold</option>
               <option value="subscription">Subscription</option>
-              <option value="merchant">Merchant</option>
+              <option value="food">Food</option>
+              <option value="transport">Transport</option>
+              <option value="gift">Gift</option>
+              <option value="education">Education</option>
               <option value="ecommerce">E-commerce Payment</option>
+              <option value="other">Other</option>
             </select>
           </div>
 
@@ -165,8 +147,6 @@ const Transfer = () => {
             Save
           </button>
         </form>
-
-        {error && <p className="error-message">{error}</p>}
       </div>
     </div>
   );

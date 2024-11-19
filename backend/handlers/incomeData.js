@@ -1,7 +1,9 @@
 const Income = require("../models/Income.js");
+const User = require("../models/user.js");
 
 async function createIncomeFunction(req, res) {
-  const { senderName, paymentMethod, amount, date, note, status } = req.body;
+  const { username, senderName, paymentMethod, amount, date, note, status } =
+    req.body;
 
   // Validation
   if (!senderName || !paymentMethod || !amount) {
@@ -10,6 +12,7 @@ async function createIncomeFunction(req, res) {
 
   try {
     const newIncome = new Income({
+      username,
       senderName,
       paymentMethod,
       amount,
@@ -19,6 +22,17 @@ async function createIncomeFunction(req, res) {
     });
 
     const savedIncome = await newIncome.save();
+
+    const user = await User.findOne({ username });
+    if (user) {
+      user.balance += Number(amount); // Add amount to balance
+      user.income += Number(amount); // Add amount to income
+
+      await user.save(); // Save updated user document
+    } else {
+      return res.status(404).json({ error: "User not found." });
+    }
+
     res.status(201).json({
       message: "Income transaction saved successfully!",
       data: savedIncome,
