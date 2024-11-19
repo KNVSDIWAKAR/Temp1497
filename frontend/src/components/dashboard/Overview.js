@@ -15,11 +15,10 @@ function Overview() {
   });
 
   useEffect(() => {
-    // Get the username from localStorage
     const username = localStorage.getItem("username");
     const data = {
       username,
-    }; // Fetch the financial data from the server using the username
+    };
     axios
       .post(`http://localhost:814/user/data`, data)
       .then((response) => {
