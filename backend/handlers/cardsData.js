@@ -1,7 +1,6 @@
-const Card = require("../models/CardModel.js");
+const Card = require("../models/card.js");
 
-// Add a new card
-exports.addCard = async (req, res) => {
+async function createCardFunction(req, res) {
   try {
     const {
       bankName,
@@ -46,4 +45,8 @@ exports.addCard = async (req, res) => {
     console.error("Error adding card:", error);
     res.status(500).json({ error: "Server error" });
   }
+}
+
+module.exports = {
+  createCardFunction,
 };
