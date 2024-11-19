@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -24,6 +24,39 @@ ChartJS.register(
 
 function IncomeExpenses() {
   const [timeframe, setTimeframe] = useState("7 Days");
+  const [creditAmounts, setCreditAmounts] = useState([]);
+  const [debitAmounts, setDebitAmounts] = useState([]);
+
+  const username = localStorage.getItem("username");
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:814/txn/allTransactions/${username}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch transactions");
+        }
+        const data = await response.json();
+
+        const creditArray = data
+          .filter((txn) => txn.type === "credit")
+          .map((txn) => txn.amount);
+        setCreditAmounts(creditArray);
+
+        // Get first 7 debit amounts
+        const debitArray = data
+          .filter((txn) => txn.type === "debit")
+          .map((txn) => txn.amount);
+        setDebitAmounts(debitArray);
+      } catch (error) {
+        console.error("Error fetching transactions:", error.message);
+      }
+    };
+
+    fetchTransactions();
+  }, [username]);
 
   const weeklyData = {
     labels: [
@@ -38,7 +71,7 @@ function IncomeExpenses() {
     datasets: [
       {
         label: "Income",
-        data: [5000, 4000, 6000, 8500, 7000, 8000, 9500],
+        data: creditAmounts.slice(0, 7),
         borderColor: "#b18ce4", // Purple color for Income
         backgroundColor: "rgba(177, 140, 228, 0.2)",
         fill: true,
@@ -46,7 +79,7 @@ function IncomeExpenses() {
       },
       {
         label: "Expense",
-        data: [3000, 3500, 3000, 3156, 4000, 3500, 4200],
+        data: debitAmounts.slice(0, 7),
         borderColor: "#94e7ce", // Green color for Expense
         backgroundColor: "rgba(148, 231, 206, 0.2)",
         fill: true,
@@ -73,10 +106,7 @@ function IncomeExpenses() {
     datasets: [
       {
         label: "Income",
-        data: [
-          50000, 52000, 58000, 60000, 55000, 58000, 60000, 62000, 63000, 65000,
-          67000, 70000,
-        ],
+        data: creditAmounts.slice(0, 12),
         borderColor: "#b18ce4", // Purple color for Income
         backgroundColor: "rgba(177, 140, 228, 0.2)",
         fill: true,
@@ -84,10 +114,7 @@ function IncomeExpenses() {
       },
       {
         label: "Expense",
-        data: [
-          30000, 35000, 32000, 34000, 36000, 38000, 40000, 42000, 44000, 46000,
-          48000, 50000,
-        ],
+        data: debitAmounts.slice(0, 12),
         borderColor: "#94e7ce",
         backgroundColor: "rgba(148, 231, 206, 0.2)",
         fill: true,
@@ -129,7 +156,7 @@ function IncomeExpenses() {
         beginAtZero: true,
         ticks: {
           callback: function (value) {
-            return "$" + value / 1000 + "K";
+            return "₹" + value / 1000 + "K";
           },
         },
       },

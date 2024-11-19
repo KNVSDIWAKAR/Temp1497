@@ -19,9 +19,7 @@ function Overview() {
     const username = localStorage.getItem("username");
     const data = {
       username,
-    };
-    console.log(username);
-    // Fetch the financial data from the server using the username
+    }; // Fetch the financial data from the server using the username
     axios
       .post(`http://localhost:814/user/data`, data)
       .then((response) => {
