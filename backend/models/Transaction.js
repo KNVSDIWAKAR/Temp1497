@@ -9,6 +9,7 @@ const transactionSchema = new mongoose.Schema({
   date: { type: String, required: true },
   mode: { type: String, required: true },
   note: { type: String },
+  type: { type: String, default: "debit" },
 });
 
 module.exports = mongoose.model("Transaction", transactionSchema);

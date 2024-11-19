@@ -52,7 +52,7 @@ function SideBar({ handleAuthentication }) {
 
         <li>
           <Link to="/transfer">
-            <FaExchangeAlt className="icon" /> Transfer
+            <FaExchangeAlt className="icon" /> Expense
           </Link>
         </li>
         <li>

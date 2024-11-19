@@ -28,6 +28,7 @@ const incomeSchema = new mongoose.Schema({
     default: "Completed",
     enum: ["Completed", "Pending"],
   },
+  type: { type: String, default: "credit" },
 });
 
 module.exports = mongoose.model("Income", incomeSchema);

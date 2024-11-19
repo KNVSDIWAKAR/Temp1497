@@ -24,7 +24,10 @@ const Income = () => {
     setError("");
     setSuccessMessage("");
 
+    const username = localStorage.getItem("username");
+
     const incomeData = {
+      username,
       senderName,
       paymentMethod,
       amount,
@@ -44,13 +47,12 @@ const Income = () => {
 
       if (response.ok) {
         const result = await response.json();
-        setSuccessMessage("Income transaction saved successfully!");
+        alert("Income transaction saved successfully!");
         setSenderName(""); // Clear senderName field
         setPaymentMethod(""); // Clear paymentMethod field
         setAmount("");
         setTransferDate("");
         setNote("");
-        setIsModalOpen(true); // Open modal on success
       } else {
         const errorData = await response.json();
         setError(errorData.error || "Something went wrong. Please try again.");
@@ -140,8 +142,10 @@ const Income = () => {
           <div className="form-group">
             <label>Transfer Option</label>
             <select>
-              <option value="receiving">Received</option>
               <option value="salary">Salary</option>
+              <option value="bonus">Bonus</option>
+              <option value="allowance">Allowance</option>
+              <option value="other">Other</option>
             </select>
           </div>
 
