@@ -3,7 +3,7 @@ import "../dashboard/Styles/Transfer.css";
 import SideBar from "./SideBar";
 
 const Transfer = ({ handleAuthentication }) => {
-  const [receiverName, setReceiverName] = useState(""); // Change from accountName to receiverName
+  const [receiverName, setReceiverName] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [amount, setAmount] = useState("");
   const [transferDate, setTransferDate] = useState("");

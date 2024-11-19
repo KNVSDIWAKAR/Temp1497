@@ -4,8 +4,6 @@ const User = require("../models/user.js");
 async function createIncomeFunction(req, res) {
   const { username, senderName, paymentMethod, amount, date, note, status } =
     req.body;
-
-  // Validation
   if (!senderName || !paymentMethod || !amount) {
     return res.status(400).json({ error: "All fields are required." });
   }
