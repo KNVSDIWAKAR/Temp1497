@@ -68,7 +68,25 @@ async function fetchCardsFunction(req, res) {
   }
 }
 
+async function recentCardsFunction(req, res) {
+  const { username } = req.params;
+  try {
+    const latestCards = await Card.find({ username })
+      .sort({ createdAt: -1 }) // Sort by the created date, latest first
+      .limit(2); // Limit to two cards
+
+    if (!latestCards) {
+      return res.status(404).json({ error: "No cards found." });
+    }
+
+    res.status(200).json(latestCards);
+  } catch (err) {
+    res.status(500).json({ error: "Error fetching cards." });
+  }
+}
+
 module.exports = {
   createCardFunction,
   fetchCardsFunction,
+  recentCardsFunction,
 };
