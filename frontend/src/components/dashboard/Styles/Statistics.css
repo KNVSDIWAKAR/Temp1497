@@ -19,17 +19,17 @@
 
 .statisticsTop,
 .statisticsBottom {
+  justify-content: center;
   display: flex;
   gap: 20px;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.income-graph-container,
-.expense-graph-container,
 .income-pie-chart-container,
 .expense-pie-chart-container {
-  flex: 1;
+  justify-content: center;
+  width: 50%;
   padding: 10px;
   color: #d3d3d3;
   background-color: #333333;
