@@ -35,7 +35,10 @@ const Cards = () => {
           >
             <div className="chip"></div>
             <div className="mastercard-logo"></div>
-            <div className="card-number">{card.cardNumber}</div>
+            <div className="card-number">
+              {card.cardNumber.replace(/\d{4}(?=.)/g, "$& ")}
+            </div>
+
             <div className="card-id">{card.cardId}</div>
             <div className="card-footer">
               <div className="card-holder">
