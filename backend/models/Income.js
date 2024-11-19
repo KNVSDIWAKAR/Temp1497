@@ -23,6 +23,7 @@ const incomeSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  category: { type: String, required: true },
   status: {
     type: String,
     default: "Completed",

@@ -108,8 +108,38 @@ async function getAllTransactions(req, res) {
   }
 }
 
+async function dataforChartFunction(req, res) {
+  const { username } = req.params;
+
+  try {
+    // Fetch records where type is 'credit'
+    const records = await Transaction.find({ username, type: "debit" });
+
+    // Group records by category and calculate sum of amounts
+    const categorySum = records.reduce((acc, record) => {
+      if (record.mode) {
+        if (!acc[record.mode]) {
+          acc[record.mode] = 0;
+        }
+        acc[record.mode] += record.amount;
+      }
+      return acc;
+    }, {});
+
+    // Send the filtered records and category-wise sum
+    res.json({
+      records,
+      categorySum,
+    });
+  } catch (err) {
+    console.error("Error fetching records:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+}
+
 module.exports = {
   createTxnFunction,
   getRecentTransactions,
   getAllTransactions,
+  dataforChartFunction,
 };
