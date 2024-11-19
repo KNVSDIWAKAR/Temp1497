@@ -8,7 +8,8 @@ const app = express();
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://pfsfrontend.vercel.app",
+    methods: ["POST", "GET"],
   })
 );
 app.use(express.json());
