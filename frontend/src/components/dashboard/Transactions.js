@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SideBar from "./SideBar";
 import "../dashboard/Styles/Transactions.css";
 
-const Transactions = () => {
+const Transactions = ({ handleAuthentication }) => {
   const [transactions, setTransactions] = useState([]);
   const username = localStorage.getItem("username");
 
@@ -27,7 +27,7 @@ const Transactions = () => {
 
   return (
     <div className="transactionscontainer">
-      <SideBar />
+      <SideBar handleAuthentication={handleAuthentication} />
       <div className="transactions-container">
         <table
           style={{

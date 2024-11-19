@@ -3,7 +3,7 @@ import Cards from "./Cards";
 import SideBar from "./SideBar";
 import "../dashboard/Styles/Cards.css";
 
-const DisplayCards = () => {
+const DisplayCards = ({ handleAuthentication }) => {
   const [cardDataList, setCardDataList] = useState([]);
   const username = localStorage.getItem("username");
   useEffect(() => {
@@ -16,29 +16,18 @@ const DisplayCards = () => {
           throw new Error("Failed to fetch card data");
         }
         const data = await response.json();
-        setCardDataList(data); // Set the fetched data to state
+        setCardDataList(data);
       } catch (err) {
-        console.log(err.message); // Handle any errors
+        console.log(err.message);
       }
     };
 
     fetchCardData();
   }, [username]);
 
-  // const shuffleArray = (array) => {
-  //   for (let i = array.length - 1; i > 0; i--) {
-  //     const j = Math.floor(Math.random() * (i + 1));
-  //     [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-  //   }
-  //   return array;
-  // };
-
-  // const shuffledCardDataList = shuffleArray(cardDataList);
-  // console.log(shuffledCardDataList);
-
   return (
     <div className="cardscontainer">
-      <SideBar />
+      <SideBar handleAuthentication={handleAuthentication} />
       <Cards cardDataList={cardDataList} />
     </div>
   );

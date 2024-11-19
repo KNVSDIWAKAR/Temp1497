@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import loginimage from "../asserts/LoginBackground.jpg";
 import { Link } from "react-router-dom";
 import axios from "axios";
 

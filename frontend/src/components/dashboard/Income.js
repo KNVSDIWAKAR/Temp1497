@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../dashboard/Styles/Transfer.css";
 import SideBar from "./SideBar";
 
-const Income = () => {
+const Income = ({ handleAuthentication }) => {
   const [senderName, setSenderName] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [amount, setAmount] = useState("");
@@ -68,7 +68,7 @@ const Income = () => {
 
   return (
     <div className="transfercontainer">
-      <SideBar />
+      <SideBar handleAuthentication={handleAuthentication} />
       <div className="transfer-container">
         <form onSubmit={handleSubmit} className="transfer-form">
           <div className="form-group">
