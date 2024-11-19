@@ -18,7 +18,7 @@ app.use(cookieParser());
 const uRoutes = require("./routes/userRoute.js");
 const transactionRoutes = require("./routes/transactionRoutes.js");
 const incomeRoutes = require("./routes/incomeRoutes.js");
-const addcardRoutes = require("./routes/addcardRoutes.js");
+const cardRoutes = require("./routes/addcardRoutes.js");
 
 // Base Route
 app.get("/", (req, res) => {
@@ -27,9 +27,9 @@ app.get("/", (req, res) => {
 
 // API Routes
 app.use("/user", uRoutes);
-app.use("/api", transactionRoutes);
-app.use("/api", incomeRoutes);
-app.use("/api", addcardRoutes);
+app.use("/txn", transactionRoutes);
+app.use("/income", incomeRoutes);
+app.use("/card", cardRoutes);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
