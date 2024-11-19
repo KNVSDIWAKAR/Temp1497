@@ -18,7 +18,7 @@ app.use(cookieParser());
 const uRoutes = require("./routes/userRoute.js");
 const transactionRoutes = require("./routes/transactionRoutes.js");
 const incomeRoutes = require("./routes/incomeRoutes.js");
-const cardRoutes = require("./routes/addcardRoutes.js");
+const cardRoutes = require("./routes/cardRoutes.js");
 
 // Base Route
 app.get("/", (req, res) => {

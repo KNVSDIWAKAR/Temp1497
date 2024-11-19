@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const createTxn = require("../handlers/transactionsData");
+const transaction = require("../handlers/transactionsData");
 
-router.post("/createTxn", createTxn.createTxnFunction);
+router.post("/createTxn", transaction.createTxnFunction);
+router.get("/recentTransactions", transaction.getRecentTransactions);
 
 module.exports = router;

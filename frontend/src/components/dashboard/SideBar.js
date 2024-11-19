@@ -38,7 +38,7 @@ function SideBar({ handleAuthentication }) {
           <img src={ProfilePicture} alt="User" className="profile-img" />
         </div>
         <p className="welcome-text">Welcome Back</p>
-        <h3 className="username">Diwakar</h3>
+        <h3 className="username">{username}</h3>
       </div>
 
       <hr className="divider" />
@@ -88,7 +88,7 @@ function SideBar({ handleAuthentication }) {
         </li>
       </ul>
 
-      <button className="logout">
+      <button className="logout" onClick={handleLogout}>
         <Link to="/">Logout</Link>
       </button>
     </aside>

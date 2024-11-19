@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../dashboard/Styles/Dashboard.css";
 import Overview from "./Overview";
 import MyCards from "./MyCards";
@@ -9,7 +9,7 @@ import SideBar from "./SideBar";
 function Dashboard({ handleAuthentication }) {
   return (
     <div className="dashboard-container">
-      <SideBar />
+      <SideBar handleAuthentication={handleAuthentication} />
       <div className="main-content">
         <Overview />
         <MyCards />

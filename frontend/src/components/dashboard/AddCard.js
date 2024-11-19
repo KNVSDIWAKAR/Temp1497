@@ -8,6 +8,7 @@ import "../dashboard/Styles/AddCard.css";
 
 const AddCard = () => {
   const [cardData, setCardData] = useState({
+    username: localStorage.getItem("username"),
     bankName: "",
     cardHolder: "",
     cardType: "Debit Card",
@@ -29,7 +30,7 @@ const AddCard = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:814/api/postaddcard", {
+      const response = await fetch("http://localhost:814/card/createCard", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,6 +42,7 @@ const AddCard = () => {
         const result = await response.json();
         alert(result.message || "Card added successfully!");
         setCardData({
+          username: "",
           bankName: "",
           cardHolder: "",
           cardType: "Debit Card",
