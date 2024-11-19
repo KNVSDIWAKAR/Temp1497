@@ -57,6 +57,7 @@ const Signup = ({ handleAuthentication }) => {
             </label>
             <div className="mt-2">
               <input
+                style={{ padding: "10px" }}
                 value={firstName}
                 onChange={(event) => setfirstName(event.target.value)}
                 id="fname"
@@ -77,6 +78,7 @@ const Signup = ({ handleAuthentication }) => {
             </label>
             <div className="mt-2">
               <input
+                style={{ padding: "10px" }}
                 value={lastName}
                 onChange={(event) => setlastName(event.target.value)}
                 id="lname"
@@ -97,6 +99,7 @@ const Signup = ({ handleAuthentication }) => {
             </label>
             <div className="mt-2">
               <input
+                style={{ padding: "10px" }}
                 value={age}
                 onChange={(event) => setAge(event.target.value)}
                 id="age"
@@ -117,6 +120,7 @@ const Signup = ({ handleAuthentication }) => {
             </label>
             <div className="mt-2">
               <select
+                style={{ padding: "10px" }}
                 value={gender}
                 onChange={(event) => setGender(event.target.value)}
                 id="gender"
@@ -139,6 +143,7 @@ const Signup = ({ handleAuthentication }) => {
             </label>
             <div className="mt-2">
               <input
+                style={{ padding: "10px" }}
                 value={username}
                 onChange={(event) => setUserName(event.target.value)}
                 id="uname"
@@ -159,6 +164,7 @@ const Signup = ({ handleAuthentication }) => {
             </label>
             <div className="mt-2">
               <input
+                style={{ padding: "10px" }}
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 id="email"
@@ -179,6 +185,7 @@ const Signup = ({ handleAuthentication }) => {
             </label>
             <div className="mt-2">
               <input
+                style={{ padding: "10px" }}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 id="password"
@@ -199,6 +206,7 @@ const Signup = ({ handleAuthentication }) => {
             </label>
             <div className="mt-2">
               <input
+                style={{ padding: "10px" }}
                 value={phone}
                 onChange={(event) => setPhone(event.target.value)}
                 id="mobile"

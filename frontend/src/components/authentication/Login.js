@@ -50,6 +50,7 @@ const Login = ({ handleAuthentication }) => {
             </label>
             <div className="mt-2">
               <input
+                style={{ padding: "10px" }}
                 value={username}
                 onChange={(event) => setUserName(event.target.value)}
                 id="uname"
@@ -80,6 +81,7 @@ const Login = ({ handleAuthentication }) => {
             </div>
             <div className="mt-2">
               <input
+                style={{ padding: "10px" }}
                 value={password}
                 onChange={(event) => setPass(event.target.value)}
                 id="password"
