@@ -2,8 +2,18 @@ const Income = require("../models/Income.js");
 const User = require("../models/user.js");
 
 async function createIncomeFunction(req, res) {
-  const { username, senderName, paymentMethod, amount, date, note, status } =
-    req.body;
+  const {
+    username,
+    senderName,
+    paymentMethod,
+    amount,
+    date,
+    note,
+    status,
+    category,
+  } = req.body;
+
+  // Validation
   if (!senderName || !paymentMethod || !amount) {
     return res.status(400).json({ error: "All fields are required." });
   }
@@ -17,6 +27,7 @@ async function createIncomeFunction(req, res) {
       date: date || new Date().toLocaleDateString(),
       note,
       status,
+      category,
     });
 
     const savedIncome = await newIncome.save();
@@ -52,7 +63,37 @@ async function showIncomeFunction(req, res) {
   }
 }
 
+async function dataforChartFunction(req, res) {
+  const { username } = req.params;
+
+  try {
+    // Fetch records where type is 'credit'
+    const records = await Income.find({ username, type: "credit" });
+
+    // Group records by category and calculate sum of amounts
+    const categorySum = records.reduce((acc, record) => {
+      if (record.category) {
+        if (!acc[record.category]) {
+          acc[record.category] = 0;
+        }
+        acc[record.category] += record.amount;
+      }
+      return acc;
+    }, {});
+
+    // Send the filtered records and category-wise sum
+    res.json({
+      records,
+      categorySum,
+    });
+  } catch (err) {
+    console.error("Error fetching records:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+}
+
 module.exports = {
   createIncomeFunction,
   showIncomeFunction,
+  dataforChartFunction,
 };

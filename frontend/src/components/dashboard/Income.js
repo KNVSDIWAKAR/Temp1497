@@ -8,6 +8,7 @@ const Income = ({ handleAuthentication }) => {
   const [amount, setAmount] = useState("");
   const [transferDate, setTransferDate] = useState("");
   const [note, setNote] = useState("");
+  const [category, setCategory] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,6 +32,7 @@ const Income = ({ handleAuthentication }) => {
       amount,
       date: transferDate || new Date().toISOString().split("T")[0],
       note,
+      category,
       status: "Completed",
     };
 
@@ -139,7 +141,12 @@ const Income = ({ handleAuthentication }) => {
 
           <div className="form-group">
             <label>Transfer Option</label>
-            <select>
+            <select
+              id="cateogry"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
+            >
               <option value="salary">Salary</option>
               <option value="bonus">Bonus</option>
               <option value="allowance">Allowance</option>
