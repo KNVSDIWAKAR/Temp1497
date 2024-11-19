@@ -11,12 +11,10 @@ const Income = ({ handleAuthentication }) => {
   const [category, setCategory] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); // For modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validation for payment method (ensure a valid method is selected)
     if (!paymentMethod) {
       setError("Please select a payment method.");
       return;
@@ -50,8 +48,8 @@ const Income = ({ handleAuthentication }) => {
       if (response.ok) {
         const result = await response.json();
         alert("Income transaction saved successfully!");
-        setSenderName(""); // Clear senderName field
-        setPaymentMethod(""); // Clear paymentMethod field
+        setSenderName("");
+        setPaymentMethod("");
         setAmount("");
         setTransferDate("");
         setNote("");
