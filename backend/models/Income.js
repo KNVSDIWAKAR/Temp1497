@@ -1,15 +1,14 @@
 const mongoose = require("mongoose");
 
 const incomeSchema = new mongoose.Schema({
-  accountName: {
+  senderName: {
     type: String,
     required: true,
   },
-  accountNumber: {
+  paymentMethod: {
     type: String,
     required: true,
-    minlength: 16,
-    maxlength: 16,
+    enum: ["cash", "card", "bankTransfer", "upi"],
   },
   amount: {
     type: Number,

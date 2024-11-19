@@ -35,7 +35,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-
           <Route path="/addcard" element={<AddCard />} />
           <Route path="/transfer" element={<Transfer />} />
           <Route path="/income" element={<Income />} />

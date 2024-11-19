@@ -2,31 +2,32 @@ const Transaction = require("../models/transaction.js");
 
 async function createTxnFunction(req, res) {
   try {
-    const { accountName, accountNumber, amount, date, note } = req.body;
+    const { receiverName, paymentMethod, amount, date, mode, note } = req.body;
 
-    if (accountNumber.length !== 16) {
-      return res
-        .status(400)
-        .json({ error: "Account number must be 16 digits." });
+    if (!receiverName || !paymentMethod || !amount || !mode) {
+      return res.status(400).json({ error: "Missing required fields" });
     }
 
     const newTransaction = new Transaction({
-      accountName,
-      accountNumber,
+      receiverName,
+      paymentMethod,
       amount,
       date: date || new Date().toLocaleDateString(),
+      mode,
       note,
     });
 
     await newTransaction.save();
+
     res.status(201).json({
       message: "Transaction saved successfully!",
       data: newTransaction,
     });
   } catch (err) {
-    res
-      .status(500)
-      .json({ error: "Internal Server Error", details: err.message });
+    res.status(500).json({
+      error: "Internal Server Error",
+      details: err.message,
+    });
   }
 }
 

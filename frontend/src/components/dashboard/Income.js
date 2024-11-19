@@ -3,20 +3,21 @@ import "../dashboard/Styles/Transfer.css";
 import SideBar from "./SideBar";
 
 const Income = () => {
-  const [accountName, setAccountName] = useState("");
-  const [accountNumber, setAccountNumber] = useState("");
+  const [senderName, setSenderName] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
   const [amount, setAmount] = useState("");
   const [transferDate, setTransferDate] = useState("");
   const [note, setNote] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // For modal visibility
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validation
-    if (accountNumber.length !== 16) {
-      setError("Account number must be 16 digits.");
+    // Validation for payment method (ensure a valid method is selected)
+    if (!paymentMethod) {
+      setError("Please select a payment method.");
       return;
     }
 
@@ -24,8 +25,8 @@ const Income = () => {
     setSuccessMessage("");
 
     const incomeData = {
-      accountName,
-      accountNumber,
+      senderName,
+      paymentMethod,
       amount,
       date: transferDate || new Date().toISOString().split("T")[0],
       note,
@@ -33,7 +34,7 @@ const Income = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:814/api/postincome", {
+      const response = await fetch("http://localhost:814/income/createIncome", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,11 +45,12 @@ const Income = () => {
       if (response.ok) {
         const result = await response.json();
         setSuccessMessage("Income transaction saved successfully!");
-        setAccountName("");
-        setAccountNumber("");
+        setSenderName(""); // Clear senderName field
+        setPaymentMethod(""); // Clear paymentMethod field
         setAmount("");
         setTransferDate("");
         setNote("");
+        setIsModalOpen(true); // Open modal on success
       } else {
         const errorData = await response.json();
         setError(errorData.error || "Something went wrong. Please try again.");
@@ -58,34 +60,43 @@ const Income = () => {
     }
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false); // Close modal
+  };
+
   return (
     <div className="transfercontainer">
       <SideBar />
       <div className="transfer-container">
         <form onSubmit={handleSubmit} className="transfer-form">
           <div className="form-group">
-            <label htmlFor="accountName">Account Name</label>
+            <label htmlFor="senderName">Sender's Name</label>
             <input
               type="text"
-              id="accountName"
-              value={accountName}
-              onChange={(e) => setAccountName(e.target.value)}
-              placeholder="Enter Account Name"
+              id="senderName"
+              value={senderName}
+              onChange={(e) => setSenderName(e.target.value)}
+              placeholder="Enter Sender's Name"
               required
             />
           </div>
+
           <div className="form-group">
-            <label htmlFor="accountNumber">Account Number</label>
-            <input
-              type="text"
-              id="accountNumber"
-              value={accountNumber}
-              onChange={(e) => setAccountNumber(e.target.value)}
-              placeholder="Enter Account Number"
-              maxLength="16"
+            <label htmlFor="paymentMethod">Payment Method</label>
+            <select
+              id="paymentMethod"
+              value={paymentMethod}
+              onChange={(e) => setPaymentMethod(e.target.value)}
               required
-            />
+            >
+              <option value="">Select Payment Method</option>
+              <option value="cash">Cash</option>
+              <option value="card">Card</option>
+              <option value="bankTransfer">Bank Transfer</option>
+              <option value="upi">UPI</option>
+            </select>
           </div>
+
           <div className="form-group">
             <label htmlFor="amount">Amount</label>
             <input
@@ -97,6 +108,7 @@ const Income = () => {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="transferDate">Date</label>
             <input
@@ -106,6 +118,7 @@ const Income = () => {
               onChange={(e) => setTransferDate(e.target.value)}
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="note">Note</label>
             <textarea
@@ -123,6 +136,7 @@ const Income = () => {
               }}
             ></textarea>
           </div>
+
           <div className="form-group">
             <label>Transfer Option</label>
             <select>
@@ -130,13 +144,26 @@ const Income = () => {
               <option value="salary">Salary</option>
             </select>
           </div>
+
           <button type="submit" className="btn-transfer">
             Save
           </button>
         </form>
 
-        {error && <p className="error-message">{error}</p>}
-        {successMessage && <p className="success-message">{successMessage}</p>}
+        {/* Modal for success message */}
+        {isModalOpen && (
+          <div className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={closeModal}>
+                &times;
+              </span>
+              <h2>{successMessage}</h2>
+              <button className="btn-transfer" onClick={closeModal}>
+                Close
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
