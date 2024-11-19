@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import SideBar from "./SideBar";
 import "../dashboard/Styles/Statistics.css";
-import IncomeGraph from "./Charts/IncomeGraph.js";
-import ExpenseGraph from "./Charts/ExpenseGraph.js";
 import IncomePieChart from "./Charts/IncomePieChart .js";
 import ExpensePieChart from "./Charts/ExpensePieChart.js";
+import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
+import { Line, Pie } from "react-chartjs-2";
+
+// Register necessary Chart.js components
+Chart.register(ArcElement, Tooltip, Legend);
 
 const Statistics = ({ handleAuthentication }) => {
-  const [isIncome, setIsIncome] = useState(true); // State to track the selected category
+  const [isIncome, setIsIncome] = useState(true);
 
   const handleSliderChange = (event) => {
     setIsIncome(event.target.value === "income");
@@ -44,10 +47,10 @@ const Statistics = ({ handleAuthentication }) => {
         <div className="statisticsBottom">
           {isIncome ? (
             <>
-              <div className="income-graph-container">
+              {/* <div className="income-graph-container">
                 <h3>Income Graph</h3>
                 <IncomeGraph />
-              </div>
+              </div> */}
               <div className="income-pie-chart-container">
                 <h3>Income Distribution</h3>
                 <IncomePieChart />
@@ -55,10 +58,10 @@ const Statistics = ({ handleAuthentication }) => {
             </>
           ) : (
             <>
-              <div className="expense-graph-container">
+              {/* <div className="expense-graph-container">
                 <h3>Expense Graph</h3>
                 <ExpenseGraph />
-              </div>
+              </div> */}
               <div className="expense-pie-chart-container">
                 <h3>Expense Distribution</h3>
                 <ExpensePieChart />
