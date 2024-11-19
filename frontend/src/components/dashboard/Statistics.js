@@ -11,10 +11,10 @@ import { Line, Pie } from "react-chartjs-2";
 // Register necessary Chart.js components
 Chart.register(ArcElement, Tooltip, Legend);
 
-const Statistics = () => {
+const Statistics = ({ handleAuthentication }) => {
   return (
     <div className="OuterContainer">
-      <SideBar />
+      <SideBar handleAuthentication={handleAuthentication} />
       <div className="InnerContainer">
         <div className="statisticsTop">
           <div className="income-graph-container">

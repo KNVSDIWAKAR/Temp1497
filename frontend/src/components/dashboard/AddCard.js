@@ -6,7 +6,7 @@ import rupayLogo from "../Asserts/rupay.png";
 import SideBar from "./SideBar";
 import "../dashboard/Styles/AddCard.css";
 
-const AddCard = () => {
+const AddCard = ({ handleAuthentication }) => {
   const [cardData, setCardData] = useState({
     username: localStorage.getItem("username"),
     bankName: "",
@@ -80,7 +80,7 @@ const AddCard = () => {
 
   return (
     <div className="addcardcontainer">
-      <SideBar />
+      <SideBar handleAuthentication={handleAuthentication} />
       <div className="add-card-container">
         <div
           className="bank-card-display"

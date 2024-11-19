@@ -4,7 +4,7 @@ import femaleProfilePic from "../Asserts/femaleAvatar.png";
 import SideBar from "./SideBar";
 import "../dashboard/Styles/Profile.css";
 
-const Profile = () => {
+const Profile = ({ handleAuthentication }) => {
   const username = localStorage.getItem("username");
   const [userData, setUserData] = useState({
     firstName: "",
@@ -28,7 +28,7 @@ const Profile = () => {
         }
 
         const data = await response.json();
-        setUserData(data); // Set the fetched data to the state
+        setUserData(data);
       } catch (error) {
         console.error("Error fetching user data:", error.message);
       }
@@ -38,7 +38,7 @@ const Profile = () => {
 
   return (
     <div className="profilecontainer">
-      <SideBar />
+      <SideBar handleAuthentication={handleAuthentication} />
       <div
         style={{
           marginTop: "170px",

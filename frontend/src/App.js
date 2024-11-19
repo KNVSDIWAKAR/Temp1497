@@ -35,13 +35,38 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/addcard" element={<AddCard />} />
-          <Route path="/transfer" element={<Transfer />} />
-          <Route path="/income" element={<Income />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/transactions" element={<Transactions />} />
-          <Route path="/cards" element={<DisplayCards />} />
-          <Route path="/statistics" element={<Statistics />} />
+          <Route
+            path="/addcard"
+            element={<AddCard handleAuthentication={handleAuthentication} />}
+          />
+          <Route
+            path="/transfer"
+            element={<Transfer handleAuthentication={handleAuthentication} />}
+          />
+          <Route
+            path="/income"
+            element={<Income handleAuthentication={handleAuthentication} />}
+          />
+          <Route
+            path="/profile"
+            element={<Profile handleAuthentication={handleAuthentication} />}
+          />
+          <Route
+            path="/transactions"
+            element={
+              <Transactions handleAuthentication={handleAuthentication} />
+            }
+          />
+          <Route
+            path="/cards"
+            element={
+              <DisplayCards handleAuthentication={handleAuthentication} />
+            }
+          />
+          <Route
+            path="/statistics"
+            element={<Statistics handleAuthentication={handleAuthentication} />}
+          />
           <Route
             path="/login"
             element={<Login handleAuthentication={handleAuthentication} />}
