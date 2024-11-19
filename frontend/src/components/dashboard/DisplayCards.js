@@ -28,7 +28,9 @@ const DisplayCards = ({ handleAuthentication }) => {
   return (
     <div className="cardscontainer">
       <SideBar handleAuthentication={handleAuthentication} />
-      <Cards cardDataList={cardDataList} />
+      <div className="d1">
+        <Cards cardDataList={cardDataList} />
+      </div>
     </div>
   );
 };
