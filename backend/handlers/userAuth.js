@@ -154,9 +154,37 @@ async function getDataFunction(req, res) {
   }
 }
 
+async function getUserDataFunction(req, res) {
+  const { username } = req.params;
+
+  try {
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    // Send the user data (excluding sensitive fields like password)
+    const userData = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      username: user.username,
+      email: user.email,
+      phone: user.phone,
+      age: user.age,
+      gender: user.gender,
+    };
+
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json({ error: "Error fetching user data" });
+  }
+}
+
 module.exports = {
   signupFunction,
   loginFunction,
   logoutFunction,
   getDataFunction,
+  getUserDataFunction,
 };

@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Age is required!"],
   },
+  gender: {
+    type: String,
+    required: [true, "Gender is required!"],
+  },
   balance: {
     type: Number,
     default: 0,

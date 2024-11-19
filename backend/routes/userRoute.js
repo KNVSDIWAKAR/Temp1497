@@ -10,5 +10,6 @@ router.post("/signup", signup.signupFunction);
 router.post("/login", login.loginFunction);
 router.post("/logout", logout.logoutFunction);
 router.post("/data", data.getDataFunction);
+router.get("/userData/:username", data.getUserDataFunction);
 
 module.exports = router;
