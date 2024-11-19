@@ -81,16 +81,6 @@ function SideBar({ handleAuthentication }) {
             <FaChartLine className="icon" /> Statistics
           </Link>
         </li>
-        {/* <li>
-          <Link to="/messages">
-            <FaEnvelope className="icon" /> Message
-          </Link>
-        </li>
-        <li>
-          <Link to="/wallet">
-            <FaWallet className="icon" /> My Wallet
-          </Link>
-        </li> */}
         <li>
           <Link to="/profile">
             <FaUser className="icon" /> Profile

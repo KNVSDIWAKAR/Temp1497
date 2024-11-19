@@ -6,13 +6,11 @@ const Transfer = () => {
   const [accountName, setAccountName] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState("");
-  const [transactionDetails, setTransactionDetails] = useState([]);
-  const [isTransferComplete, setIsTransferComplete] = useState(false);
-  const [error, setError] = useState("");
   const [transferDate, setTransferDate] = useState("");
   const [note, setNote] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (accountNumber.length !== 16) {
@@ -25,14 +23,34 @@ const Transfer = () => {
       accountName,
       accountNumber,
       amount,
-      status: "Completed",
       date: transferDate || new Date().toLocaleDateString(),
       note,
     };
 
-    setTransactionDetails([newTransaction]);
+    try {
+      const response = await fetch("http://localhost:814/api/posttransaction", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTransaction),
+      });
 
-    setIsTransferComplete(true);
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error || "Failed to save transaction.");
+      } else {
+        alert("Transaction saved successfully!");
+        setAccountName("");
+        setAccountNumber("");
+        setAmount("");
+        setTransferDate("");
+        setNote("");
+      }
+    } catch (err) {
+      setError("Something went wrong. Please try again later.");
+    }
   };
 
   return (
@@ -115,36 +133,6 @@ const Transfer = () => {
         </form>
 
         {error && <p className="error-message">{error}</p>}
-
-        {isTransferComplete && (
-          <div className="transaction-summary">
-            <h3>Transaction Details</h3>
-            <table className="transaction-table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Account Name</th>
-                  <th>Account Number</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th>Note</th>
-                </tr>
-              </thead>
-              <tbody>
-                {transactionDetails.map((transaction, index) => (
-                  <tr key={index}>
-                    <td>{transaction.date}</td>
-                    <td>{transaction.accountName}</td>
-                    <td>{transaction.accountNumber}</td>
-                    <td>{transaction.amount}</td>
-                    <td>{transaction.status}</td>
-                    <td>{transaction.note}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
       </div>
     </div>
   );

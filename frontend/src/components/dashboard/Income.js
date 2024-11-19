@@ -1,37 +1,61 @@
 import React, { useState } from "react";
 import "../dashboard/Styles/Transfer.css";
 import SideBar from "./SideBar";
+
 const Income = () => {
   const [accountName, setAccountName] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState("");
-  const [transactionDetails, setTransactionDetails] = useState([]);
-  const [isTransferComplete, setIsTransferComplete] = useState(false);
-  const [error, setError] = useState("");
   const [transferDate, setTransferDate] = useState("");
   const [note, setNote] = useState("");
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validation
     if (accountNumber.length !== 16) {
       setError("Account number must be 16 digits.");
       return;
     }
 
     setError("");
-    const newTransaction = {
+    setSuccessMessage("");
+
+    const incomeData = {
       accountName,
       accountNumber,
       amount,
-      status: "Completed",
-      date: transferDate || new Date().toLocaleDateString(),
+      date: transferDate || new Date().toISOString().split("T")[0],
       note,
+      status: "Completed",
     };
 
-    setTransactionDetails([newTransaction]);
+    try {
+      const response = await fetch("http://localhost:814/api/postincome", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(incomeData),
+      });
 
-    setIsTransferComplete(true);
+      if (response.ok) {
+        const result = await response.json();
+        setSuccessMessage("Income transaction saved successfully!");
+        setAccountName("");
+        setAccountNumber("");
+        setAmount("");
+        setTransferDate("");
+        setNote("");
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setError("Unable to connect to the server. Please try again later.");
+    }
   };
 
   return (
@@ -88,7 +112,7 @@ const Income = () => {
               id="note"
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              placeholder="Enter Note "
+              placeholder="Enter Note"
               rows="3"
               style={{
                 backgroundColor: "#1e1e1f",
@@ -103,7 +127,7 @@ const Income = () => {
             <label>Transfer Option</label>
             <select>
               <option value="receiving">Received</option>
-              <option value="salary">Salary</option>ss
+              <option value="salary">Salary</option>
             </select>
           </div>
           <button type="submit" className="btn-transfer">
@@ -112,36 +136,7 @@ const Income = () => {
         </form>
 
         {error && <p className="error-message">{error}</p>}
-
-        {isTransferComplete && (
-          <div className="transaction-summary">
-            <h3>Transaction Details</h3>
-            <table className="transaction-table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Account Name</th>
-                  <th>Account Number</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th>Note</th>
-                </tr>
-              </thead>
-              <tbody>
-                {transactionDetails.map((transaction, index) => (
-                  <tr key={index}>
-                    <td>{transaction.date}</td>
-                    <td>{transaction.accountName}</td>
-                    <td>{transaction.accountNumber}</td>
-                    <td>{transaction.amount}</td>
-                    <td>{transaction.status}</td>
-                    <td>{transaction.note}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+        {successMessage && <p className="success-message">{successMessage}</p>}
       </div>
     </div>
   );

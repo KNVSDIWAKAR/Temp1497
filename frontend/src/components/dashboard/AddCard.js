@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
+import { useNavigate } from "react-router-dom";
 import visaLogo from "../Asserts/visa.png";
 import mastercardLogo from "../Asserts/mastercard.png";
 import rupayLogo from "../Asserts/rupay.png";
@@ -17,12 +17,47 @@ const AddCard = () => {
     cvv: "",
   });
 
-  const [showCvv, setShowCvv] = useState(false); // State to toggle CVV visibility
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const [showCvv, setShowCvv] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCardData({ ...cardData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:814/api/postaddcard", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cardData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        alert(result.message || "Card added successfully!");
+        setCardData({
+          bankName: "",
+          cardHolder: "",
+          cardType: "Debit Card",
+          paymentNetwork: "Visa",
+          cardNumber: "",
+          expiryDate: "",
+          cvv: "",
+        });
+        navigate("/dashboard");
+      } else {
+        const errorData = await response.json();
+        alert(errorData.error || "Failed to add card. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error adding card:", error);
+      alert("An error occurred. Please try again later.");
+    }
   };
 
   const getPaymentNetworkLogo = () => {
@@ -38,13 +73,8 @@ const AddCard = () => {
     }
   };
 
-  // Determine the card background color based on the card type
   const cardBackgroundColor =
     cardData.cardType === "Debit Card" ? "#4a90e2" : "#28a745";
-
-  const handleGoBack = () => {
-    navigate("/dashboard"); // Navigate to the "/dashboard" route
-  };
 
   return (
     <div className="addcardcontainer">
@@ -77,7 +107,7 @@ const AddCard = () => {
           </div>
         </div>
         <div>
-          <form className="card-details-form">
+          <form className="card-details-form" onSubmit={handleSubmit}>
             <div className="form-field">
               <label>Bank Name</label>
               <input
@@ -152,14 +182,14 @@ const AddCard = () => {
               <div className="form-field">
                 <label>CVV</label>
                 <input
-                  type={showCvv ? "text" : "password"} // Change input type based on showCvv state
+                  type={showCvv ? "text" : "password"}
                   name="cvv"
                   value={cardData.cvv}
                   onChange={handleChange}
                   maxLength="3"
                   placeholder="CVV"
-                  onFocus={() => setShowCvv(true)} // Show CVV on focus
-                  onBlur={() => setShowCvv(false)} // Hide CVV on blur
+                  onFocus={() => setShowCvv(true)}
+                  onBlur={() => setShowCvv(false)}
                 />
               </div>
             </div>
