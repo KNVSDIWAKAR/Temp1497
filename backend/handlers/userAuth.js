@@ -15,6 +15,7 @@ async function signupFunction(req, res) {
       password: plainTextPassword,
       phone,
       age,
+      gender,
     } = req.body;
 
     console.log(username);
@@ -69,6 +70,7 @@ async function signupFunction(req, res) {
           password,
           phone,
           age,
+          gender,
         });
         console.log("User Created Successfully: ", response);
         return res.json({ status: 200, message: "User Created Successfully!" });
